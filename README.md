@@ -4,7 +4,7 @@ Provides an Openwire input for Graylog using the ActiveMQ client library
 
 ## Acknowledgements
 
-Th MQTT plugin lays the groundwork on how to accomplish writing your own inputs for Graylog. The code is well organized and very readable. https://github.com/graylog-labs/graylog-plugin-mqtt
+The Graylog MQTT plugin lays the groundwork on how to accomplish writing your own inputs for Graylog. The code is well organized and very readable. https://github.com/graylog-labs/graylog-plugin-mqtt
 
 
 ## License
