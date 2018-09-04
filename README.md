@@ -21,7 +21,8 @@ gpg --recv-keys 871638A21A7F2C38066471420306A354336B4F0D
 wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-1.0.1/graylog-plugin-openwire-1.0.1.jar.asc
 wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-1.0.1/graylog-plugin-openwire-1.0.1.jar
 gpg --verify graylog-plugin-openwire-1.0.1.jar.asc graylog-plugin-openwire-1.0.1.jar
-sudo mv graylog-plugin-openwire-1.0.1.jar /usr/share/graylog-server/plugin
+rm graylog-plugin-openwire-1.0.1.jar.asc
+sudo mv graylog-plugin-openwire-1.0.1.jar /usr/share/graylog-server/plugin/
 sudo chown root:root /usr/share/graylog-server/plugin/graylog-plugin-openwire-1.0.1.jar
 sudo systemctl restart graylog-server
 ```
