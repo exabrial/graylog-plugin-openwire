@@ -115,7 +115,8 @@ public class OpenwireTransport extends ThrottleableTransport {
 
 	@Override
 	public void doLaunch(final MessageInput input) throws MisfireException {
-		consumer = new OpenwireConsumer(configuration.getString(brokerUrl), configuration.getString(queueName), input, scheduler, this);
+		consumer = new OpenwireConsumer(configuration.getString("brokerUrl"), configuration.getString("queueName"), input, scheduler,
+				this);
 		eventBus.register(this);
 		try {
 			consumer.run();
