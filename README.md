@@ -37,3 +37,8 @@ After that step is completed, restart your server and you should have the new in
 
 ## Configuration
 
+| Property Name      | Example                                                                                                      | Purpose                                                                             |
+|--------------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| brokerUrl          | failover:(ssl://activemq-1.example.com:61616,ssl://activemq-2.example.com:61616)?randomize=false&backup=true | The ActiveMQ client URL. Any valid ActiveMQ client URL can be used.                 |
+| queueName          | ch.qos.logback                                                                                               | The Queue name to read logs off of.                                                 |
+| throttling_allowed | true                                                                                                         | If the graylog server gets busy, slow down this input. Recommend checking this box. |
