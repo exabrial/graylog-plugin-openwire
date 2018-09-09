@@ -1,7 +1,12 @@
-# graylog-plugin-openwire
-Provides an Openwire input for Graylog using the ActiveMQ client library. Bridges `ActiveMQ->Graylog`
+# Graylog Plugin Openwire
+Bridges `ActiveMQ->Graylog`
 
-If you use Logback inside your JavaEE applications, you can easily get your messages to ActiveMQ with this Logback appender: https://github.com/exabrial/logback-jms-appender
+Provides an input for Graylog using the ActiveMQ client library. Openwire is the native protocol for ActiveMQ, but all valid client ActiveMQ URLs can be used. 
+
+If you use Logback inside your JavaEE applications, I have two logback appenders you can use:
+
+* https://github.com/exabrial/logback-jms-appender  (Best for Java EE apps with a managed JMS Configuration)
+* https://github.com/exabrial/logback-openwire-appender (Best for Spring Boot or non EE standalone apps)
 
 ## Acknowledgements
 
@@ -29,3 +34,6 @@ sudo systemctl restart graylog-server
 ```
 
 After that step is completed, restart your server and you should have the new input options available.
+
+## Configuration
+
