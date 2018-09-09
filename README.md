@@ -1,6 +1,7 @@
 # graylog-plugin-openwire
 Provides an Openwire input for Graylog using the ActiveMQ client library
 
+If you use Logback inside your JavaEE applications, you can easily get your messages to ActiveMQ with this Logback appender: https://github.com/exabrial/logback-jms-appender
 
 ## Acknowledgements
 
