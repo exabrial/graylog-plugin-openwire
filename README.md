@@ -3,7 +3,7 @@ Bridges `ActiveMQ->Graylog`
 
 Provides an input for Graylog using the ActiveMQ client library. Openwire is the native protocol for ActiveMQ, but all valid client ActiveMQ URLs can be used. 
 
-If you use Logback inside your JavaEE applications, I have two logback appenders you can use:
+If you use Logback inside your Java [possibly EE] applications, I have two logback appenders you can use:
 
 * https://github.com/exabrial/logback-jms-appender  (Best for Java EE apps with a managed JMS Configuration)
 * https://github.com/exabrial/logback-openwire-appender (Best for Spring Boot or non EE standalone apps)
