@@ -5,6 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.jms.BytesMessage;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.ExceptionListener;
@@ -58,8 +59,18 @@ public class OpenwireConsumer {
 			@Override
 			public void onMessage(Message message) {
 				try {
-					TextMessage textMessage = (TextMessage) message;
-					String body = textMessage.getText();
+					String body;
+					if (message instanceof TextMessage) {
+						TextMessage textMessage = (TextMessage) message;
+						body = textMessage.getText();
+					} else if (message instanceof BytesMessage) {
+						BytesMessage bytesMessage = (BytesMessage) message;
+						byte[] bodyBytes = new byte[(int) bytesMessage.getBodyLength()];
+						bytesMessage.readBytes(bodyBytes);
+						body = new String(bodyBytes, StandardCharsets.UTF_8);
+					} else {
+						throw new RuntimeException("unsupported message type:" + message.getClass());
+					}
 					totalBytesRead.addAndGet(body.length());
 					lastSecBytesReadTmp.addAndGet(body.length());
 					final RawMessage rawMessage = new RawMessage(body.getBytes(StandardCharsets.UTF_8));
