@@ -30,8 +30,16 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
 public class OpenwireTransport extends ThrottleableTransport {
-	public static final String brokerUrl = "ActiveMQ Broker URL";
-	public static final String queueName = "Queue Name";
+	private static final String BROKER_URL_CONFIGURATION_KEY = "brokerUrl";
+	private static final String USERNAME_CONFIGURATION_KEY = "username";
+	private static final String PASSWORD_CONFIGURATION_KEY = "password";
+	private static final String QUEUE_NAME_CONFIGURATION_KEY = "queueName";
+
+	private static final String BROKER_URL_CONFIGURATION_HUMAN_NAME = "ActiveMQ Broker URL";
+	private static final String QUEUE_NAME_CONFIGURATION_HUMAN_NAME = "Queue Name";
+	private static final String USERNAME_CONFIGURATION_HUMAN_NAME = "Username";
+	private static final String PASSWORD_CONFIGURATION_HUMAN_NAME = "Password";
+
 	private static final Logger log = LoggerFactory.getLogger(OpenwireTransport.class);
 
 	private final Configuration configuration;
@@ -115,7 +123,10 @@ public class OpenwireTransport extends ThrottleableTransport {
 
 	@Override
 	public void doLaunch(final MessageInput input) throws MisfireException {
-		consumer = new OpenwireConsumer(configuration.getString("brokerUrl"), configuration.getString("queueName"), input, scheduler,
+		consumer = new OpenwireConsumer(configuration.getString(BROKER_URL_CONFIGURATION_KEY),
+				configuration.getString(USERNAME_CONFIGURATION_KEY),
+				configuration.getString(PASSWORD_CONFIGURATION_KEY),
+				configuration.getString(QUEUE_NAME_CONFIGURATION_KEY), input, scheduler,
 				this);
 		eventBus.register(this);
 		try {
@@ -157,11 +168,16 @@ public class OpenwireTransport extends ThrottleableTransport {
 		@Override
 		public ConfigurationRequest getRequestedConfiguration() {
 			final ConfigurationRequest cr = super.getRequestedConfiguration();
-			cr.addField(new TextField("brokerUrl", brokerUrl, defaultBrokerUrl(),
+			cr.addField(new TextField(BROKER_URL_CONFIGURATION_KEY, BROKER_URL_CONFIGURATION_HUMAN_NAME, defaultBrokerUrl(),
 					"ActiveMQ Broker URL to connect to; Reference the ActiveMQ documentation for help",
 					ConfigurationField.Optional.NOT_OPTIONAL));
-			cr.addField(new TextField("queueName", queueName, defaultQueueName(), "Name of queue to listen on",
+			cr.addField(new TextField(QUEUE_NAME_CONFIGURATION_KEY, QUEUE_NAME_CONFIGURATION_HUMAN_NAME, defaultQueueName(), "Name of queue to listen on",
 					ConfigurationField.Optional.NOT_OPTIONAL));
+			cr.addField(new TextField(USERNAME_CONFIGURATION_KEY, USERNAME_CONFIGURATION_HUMAN_NAME, null,
+					"username for ActiveMQ broker; Reference the ActiveMQ documentation for help",
+					ConfigurationField.Optional.OPTIONAL));
+			cr.addField(new TextField(PASSWORD_CONFIGURATION_KEY, PASSWORD_CONFIGURATION_HUMAN_NAME, null, "password for ActiveMQ broker; Reference the ActiveMQ documentation for help",
+					ConfigurationField.Optional.OPTIONAL));
 			return cr;
 		}
 
@@ -170,7 +186,7 @@ public class OpenwireTransport extends ThrottleableTransport {
 		}
 
 		protected String defaultQueueName() {
-			return "com.example.logback";
+			return "ch.qos.logback";
 		}
 	}
 }
