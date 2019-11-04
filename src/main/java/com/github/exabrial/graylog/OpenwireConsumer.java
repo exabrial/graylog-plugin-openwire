@@ -24,6 +24,8 @@ import org.slf4j.LoggerFactory;
 
 public class OpenwireConsumer {
 	private final String brokerUrl;
+	private final String username;
+	private final String password;
 	private final String queue;
 	private final MessageInput sourceInput;
 	private final OpenwireTransport openwireTransport;
@@ -33,9 +35,11 @@ public class OpenwireConsumer {
 	private AtomicLong lastSecBytesReadTmp = new AtomicLong(0);
 	private Connection connection;
 
-	OpenwireConsumer(String brokerUrl, String queue, MessageInput sourceInput, ScheduledExecutorService scheduler,
-			OpenwireTransport openwireTransport) {
+	OpenwireConsumer(String brokerUrl, String username, String password, String queue, MessageInput sourceInput,
+			ScheduledExecutorService scheduler, OpenwireTransport openwireTransport) {
 		this.brokerUrl = brokerUrl;
+		this.username = username;
+		this.password = password;
 		this.queue = queue;
 		this.sourceInput = sourceInput;
 		this.openwireTransport = openwireTransport;
@@ -88,7 +92,12 @@ public class OpenwireConsumer {
 	}
 
 	public void connect() throws JMSException {
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerUrl);
+		ActiveMQConnectionFactory connectionFactory;
+		if (username != null && !"".equals(username)) {
+			connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
+		} else {
+			connectionFactory = new ActiveMQConnectionFactory(brokerUrl);
+		}
 		connection = connectionFactory.createConnection();
 		connection.start();
 		connection.setExceptionListener(new ExceptionListener() {
