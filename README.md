@@ -24,12 +24,12 @@ Since Upsteam Graylog and the MQTT plugin are GPL, this project is GPL to confor
 ```
 cd ~
 gpg --keyserver pool.sks-keyservers.net --recv-keys 871638A21A7F2C38066471420306A354336B4F0D
-wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-1.1.0/graylog-plugin-openwire-1.1.0.jar.asc
-wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-1.1.0/graylog-plugin-openwire-1.1.0.jar
-gpg --verify graylog-plugin-openwire-1.1.0.jar.asc graylog-plugin-openwire-1.1.0.jar
-rm graylog-plugin-openwire-1.1.0.jar.asc
-sudo mv graylog-plugin-openwire-1.1.0.jar /usr/share/graylog-server/plugin/
-sudo chown root:root /usr/share/graylog-server/plugin/graylog-plugin-openwire-1.1.0.jar
+wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-1.2.0/graylog-plugin-openwire-1.2.0.jar.asc
+wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-1.2.0/graylog-plugin-openwire-1.2.0.jar
+gpg --verify graylog-plugin-openwire-1.2.0.jar.asc graylog-plugin-openwire-1.2.0.jar
+rm graylog-plugin-openwire-1.2.0.jar.asc
+sudo mv graylog-plugin-openwire-1.2.0.jar /usr/share/graylog-server/plugin/
+sudo chown root:root /usr/share/graylog-server/plugin/graylog-plugin-openwire-1.2.0.jar
 sudo systemctl restart graylog-server
 ```
 
