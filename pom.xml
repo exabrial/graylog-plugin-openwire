@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.graylog2</groupId>
 			<artifactId>graylog2-server</artifactId>
-			<version>5.0.5</version>
+			<version>5.0.9</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
