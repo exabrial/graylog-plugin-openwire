@@ -23,7 +23,7 @@ Since Upsteam Graylog and the MQTT plugin are GPL, this project is GPL to confor
 
 ```
 cd ~
-gpg --keyserver pool.sks-keyservers.net --recv-keys 871638A21A7F2C38066471420306A354336B4F0D
+gpg --recv-keys 871638A21A7F2C38066471420306A354336B4F0D
 wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-2.0.1/graylog-plugin-openwire-2.0.1.jar.asc
 wget https://github.com/exabrial/graylog-plugin-openwire/releases/download/graylog-plugin-openwire-2.0.1/graylog-plugin-openwire-2.0.1.jar
 gpg --verify graylog-plugin-openwire-2.0.1.jar.asc graylog-plugin-openwire-2.0.1.jar
